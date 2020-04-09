@@ -20,7 +20,7 @@ class TestM3u8Downloader:
         logging.info("开始初始化...")
 
         # m3u8文件地址
-        self.m3u8_url = "https://www.diankaiquanwen.com/20200316/j7tQIfxJ/1000kb/hls/index.m3u8"
+        self.m3u8_url = "https://www.zhongyuguozi.com//20200101/Q8Y06CNz/1000kb/hls/index.m3u8"
         # m3u8文件存储路径
         self.m3u8_file = os.getcwd() + '/index.m3u8'
 
@@ -90,7 +90,8 @@ class TestM3u8Downloader:
         """
         step4.下载ts文件
         """
-        for i in range(len(self.ts_list)):
+        # for i in range(len(self.ts_list)):
+        for i in range(50):
             # 拼接ts地址
             ts_url = self.m3u8_url.replace("index.m3u8", self.ts_list[i])
             # 调用ts地址
@@ -123,6 +124,10 @@ class TestM3u8Downloader:
         """
         # 切换到下载文件目录
         os.chdir(self.mp4_folder)
+        # 获取ts目录下所有文件
+        mp4_list = os.listdir(self.mp4_folder)
+        # 排序
+        mp4_list.sort()
         # 合并文件输出
         os.system("cat *.mp4 > all.mp4")
 
@@ -130,8 +135,8 @@ class TestM3u8Downloader:
     step7.清理无用数据
     """
     def teardown(self):
-        cmd_rm_ts = "rm -rf " + self.ts_folder + "*.ts"
-        cmd_rm_ts_mp4 = "rm -rf " + self.mp4_folder + "*.ts.mp4"
-        os.system(cmd_rm_ts)
-        os.system(cmd_rm_ts_mp4)
+        # cmd_rm_ts = "rm -rf " + self.ts_folder + "*.ts"
+        # cmd_rm_ts_mp4 = "rm -rf " + self.mp4_folder + "*.ts.mp4"
+        # os.system(cmd_rm_ts)
+        # os.system(cmd_rm_ts_mp4)
         logging.info('视频合并完成！')
